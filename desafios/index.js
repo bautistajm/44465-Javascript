@@ -1,86 +1,64 @@
 // Function to extract price from array of clothes.
 const getPrice = () => {
-    for (const clothing of clothes){
-        if (product === clothing.item) {
-            return clothing.price;
+    for (const grocery of groceries){
+        if (product === grocery.item) {
+            return grocery.price;
         }
     }
 }
 
-
 // Array of objects for the different products.
-const clothes = [
-    {item:"t-shirt", price:10, color:"white"},
-    {item:"pants", price:15, color:"blue"},
-    {item:"shoes", price:35, color:"black"},
-    {item:"socks", price:35, color:"white"},
-    {item:"coat", price:50, color:"black"},
+const groceries = [
+    {item:"Onion Flavour Potato", price: 3.99, category: "Snacks", image: "./images/product-img-4.jpg"},
+    {item:"Blueberry Greek Yogurt", price: 5, category: "Dairy", image: "./images/product-img-6.jpg"},
+    {item:"Salted Instant Popcorn", price: 2.50, category: "Instant Food", image: "./images/product-img-5.jpg"},
+    {item:"Britannia Cheese Slices", price: 6.25, category: "Dairy", image: "./images/product-img-7.jpg"},
+    {item:"Crushed Tomatoes", price: 4.99, category: "Fruits & Vegetables", image: "./images/product-img-12.jpg"},
 ]
 
-// Initialization of variables.
-// Initial total amount is equal to 0.
-let totalAmount = 0;
+// DOM to obtain the HTML element by Id where products will be added.
+let container = document.getElementById("main");
 
-// Makes variables global.
-let product;
-let backShop;
-let backFilter;
-let backStart;
+// For loop to create the different cards for each product.
+for (let i = 0; i < groceries.length; i++) {
+    let card = document.createElement("div");
+    card.classList = "col mb-5";
+    console.log(card.classList)
+    card.innerHTML = 
+    `<div class="card h-100">
+        <!-- Product image-->
+        <img class="card-img-top" src="${groceries[i].image}" alt="...">
+        <!-- Product details-->
+        <div class="card-body p-4">
+            <div class="text-center">
+            <!-- Product category-->
+            <h6>${groceries[i].category}</h6>
+            <!-- Product name-->
+            <h5 class="fw-bolder">${groceries[i].item}</h5>
+            <!-- Product price-->
+            $${groceries[i].price}
+            </div>
+        </div>
+        <!-- Product actions-->
+        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+        </div>
+    </div>`;
+    container.appendChild(card);
+}
 
-// Do While where the user is prompted to insert a product name to get the price.
 
 
-do {
-    // Prompts the user to choose between buy an item or filter by color.
-    userAction = prompt("Type 'buy' to select products or type 'filter' to filter products by color.").toLowerCase();
-    // Starts 'do while' for shopping.
-    if (userAction === "buy") {
-        do {
-            // User inserts product name
-            product = prompt("Insert product name").toLowerCase();
-            // Cheks if the product exists.
-            if (getPrice()) {
-                let price = getPrice();
-                // Display the product name and price.
-                alert(`The price of ${product} is $${price}`);
-                // Adds price to total amount.
-                totalAmount = totalAmount + price;
-                // Asks user if they would continue shopping.
-                backShop = confirm("Would you like to continue shopping?");
-            } else {
-                // Message if product is not found.
-                alert("Unfortunately we don't have this product on stock at the moment.")
-                // Asks user if they would continue shopping.
-                backShop = confirm("Would you like to continue shopping?");
-            }
-        // Loop continues if the user wants to keep shopping.
-        } while (backShop)
-        // Display message with total amount once the loop is broken.
-        alert(`The total amount of your cart is $${totalAmount}`);
-    } else if (userAction === "filter") {
-        // Starts 'do while' for color filter.
-        do {
-            // Prompts the user to type a color.
-            colorSelection = prompt("Please type a color").toLowerCase();
-            // Triggers the result of the filtering.
-            const result = clothes.filter((e) => e.color.includes(colorSelection));
-            // Checks if there is an item with color input by the user.
-            const colorCheck = clothes.find((e) => e.color === colorSelection);
-            if (colorCheck) {
-                // Allows to show object properties in alert message.
-                alert(JSON.stringify(result));
-                // Asks user if they would like to check for another color.
-                backFilter = confirm("Would you like to check another color?");
-            } else {
-                // Message when the color has not been found.
-                alert(`Unfortunately there are no ${colorSelection} clothing items.`);
-                // Asks user if they would like to check for another color.
-                backFilter = confirm("Would you like to check another color?");
-            }
-        // Breaks the loop if the user doesn't want to look for another color.
-        } while (backFilter)
-    }
-    // Asks the user if they would like to buy or filter again.
-    backStart = confirm("Would you like to start over?");
-// Breaks the loop when the user decides to quit.
-} while (backStart)
+
+
+
+// // Initialization of variables.
+// // Initial total amount is equal to 0.
+// let totalAmount = 0;
+
+// // Makes variables global.
+// let product;
+// let backShop;
+// let backFilter;
+// let backStart;
+
