@@ -16,28 +16,61 @@
 </head>
 <body>
     <!-- Header start -->
-    <div class="container">
-        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-          <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-            <img src="./images/logo.webp" width="40" height="40" role="img"></img>
-          </a>
-    
-          <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
-            <li><a href="./pages/products.html" class="nav-link px-2 link-dark">Products</a></li>
-            <li><a href="./pages/faqs.html" class="nav-link px-2 link-dark">FAQs</a></li>
-            <li><a href="./pages/about.html" class="nav-link px-2 link-dark">About</a></li>
-            <li><a href="./pages/contact.html" class="nav-link px-2 link-dark">Contact</a></li>
-          </ul>
-    
-          <div class="col-md-3 text-end">
-            <button type="button" class="btn btn-outline-primary me-2">Login</button>
-            <button type="button" class="btn btn-primary">Sign-up</button>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container px-4 px-lg-5">
+          <a class="navbar-brand" href="#!">Grocery Store</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+          <div class="navbar-collapse collapse show" id="navbarSupportedContent" style="">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                  <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                  <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <li><a class="dropdown-item" href="#!">All Products</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="#!">Popular Items</a></li>
+                          <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
+                      </ul>
+                  </li>
+              </ul>
+              <div class="d-flex">
+                  <button class="btn btn-outline-dark" type="submit" id="cart-button">
+                      <i class="bi-cart-fill me-1"></i>
+                      Cart
+                      <span class="badge bg-dark text-white ms-1 rounded-pill" id="product-counter">0</span>
+                  </button>
+              </div>
           </div>
-        </header>
+      </div>
+  </nav>
       </div>
       <!-- Header end -->
+      <!-- Modal start -->
+      <div class="display-none" tabindex="-1" role="dialog" id="modal">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Cart</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="x-close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p id="no-products-selected"></p>
+              <p id="cart-message"></p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary display-none" id="ok-button">OK</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close-button">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal end -->
+
       <div class="container px-4 px-lg-5 mt-5"><main id="main" class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"></main></div>
+
       <!-- Footer start -->
       <div class="container">
         <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
@@ -45,7 +78,7 @@
             <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
               <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
             </a>
-            <span class="text-muted">© 2021 Company, Inc</span>
+            <span class="text-muted">Â© 2021 Company, Inc</span>
           </div>
       
           <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
