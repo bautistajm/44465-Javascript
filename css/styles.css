@@ -11290,3 +11290,13 @@ textarea.form-control-lg {
 .display-none {
   display: none;
 }
+
+.removecross:hover {
+  cursor: pointer;
+}
+
+.line {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

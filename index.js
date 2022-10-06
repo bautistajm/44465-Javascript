@@ -15,10 +15,28 @@ const addToCart = () => {
         for (let i = 0; i < selectedProducts.length; i++) {
             noProductsSelected.innerText = "";
             line = document.createElement("li");
+            line.classList.add("line");
             line.innerText = `${selectedProducts[i].item}, $${selectedProducts[i].price}`;
+            containerOfProducts.appendChild(line);
+            let removeCrossButton = document.createElement("div");
+            removeCrossButton.classList.add("removecross");
+            removeCrossButton.innerText = "❌";
+            removeCrossButton.onclick = () => {
+                selectedProducts.splice (i, 1);
+                localStorage.setItem("selectedproducts", JSON.stringify(selectedProducts));
+                cartMessage.removeChild(line);
+                productCounter.innerText = selectedProducts.length;
+                localStorage.setItem("productcounter", selectedProducts.length);
+                if (selectedProducts.length === 0) {
+                    noProductsSelected.innerText = "You have not selected any product yet.";
+                }
+            }
+            line.appendChild(removeCrossButton);
         }
-    cartMessage.appendChild(line);
-    productCounter.innerText = selectedProducts.length;
+        cartMessage.appendChild(line);
+        localStorage.setItem("selectedproducts", JSON.stringify(selectedProducts));
+        productCounter.innerText = selectedProducts.length;
+        localStorage.setItem("productcounter", selectedProducts.length);
     }
 }
 
@@ -46,6 +64,7 @@ let cartMessage = document.getElementById("cart-message");
 let noProductsSelected = document.getElementById("no-products-selected");
 noProductsSelected.innerText = "You have not selected any product yet.";
 let cartButton = document.getElementById("cart-button");
+let containerOfProducts = document.createElement("div");
 
 //Events for modal and its elements
 
@@ -60,6 +79,37 @@ xButton.onclick = () => {
 closeButton.onclick = () => {
     cart.style.display = "none";
 }
+
+let productsInStorage = JSON.parse(localStorage.getItem("selectedproducts"));
+if ((productsInStorage !== null)) {
+    for (let i = 0; i < productsInStorage.length; i++) {
+        selectedProducts.push(productsInStorage[i]);
+    }
+    for (let i = 0; i < selectedProducts.length; i++) {
+        productCounter.innerText = localStorage.getItem("productcounter");
+        noProductsSelected.innerText = "";
+        let line = document.createElement("li");
+        line.classList.add("line");
+        line.innerText = `${selectedProducts[i].item}, $${selectedProducts[i].price}`;
+        cartMessage.appendChild(line);
+        let removeCrossButton = document.createElement("div");
+        removeCrossButton.classList.add("removecross");
+        removeCrossButton.innerText = "❌";
+        removeCrossButton.onclick = () => {
+            selectedProducts.splice (i, 1);
+            localStorage.setItem("selectedproducts", JSON.stringify(selectedProducts));
+            cartMessage.removeChild(line);
+            productCounter.innerText = selectedProducts.length;
+            localStorage.setItem("productcounter", selectedProducts.length);
+            if (selectedProducts.length === 0) {
+                noProductsSelected.innerText = "You have not selected any product yet.";
+            }
+        }
+        line.appendChild(removeCrossButton);
+    };
+}
+
+
 
 // For loop to create the different cards for each product.
 for (let i = 0; i < groceries.length; i++) {
