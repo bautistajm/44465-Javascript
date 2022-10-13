@@ -33,6 +33,15 @@ const addToCart = () => {
             }
             line.appendChild(removeCrossButton);
         }
+        let lastProductAdded = selectedProducts.length - 1;
+        //Tostify
+        Toastify({
+
+        text: `You added ${selectedProducts[lastProductAdded].item}  to the cart.`,
+
+        duration: 3000
+
+        }).showToast();
         cartMessage.appendChild(line);
         localStorage.setItem("selectedproducts", JSON.stringify(selectedProducts));
         productCounter.innerText = selectedProducts.length;
