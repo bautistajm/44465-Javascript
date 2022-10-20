@@ -1,0 +1,36 @@
+[{
+        "item": "Onion Flavour Potato",
+        "price": 3.99,
+        "category": "Snacks",
+        "image": "./images/product-img-4.jpg",
+        "id": "product0001"
+    },
+    {
+        "item": "Blueberry Greek Yogurt",
+        "price": 5,
+        "category": "Dairy",
+        "image": "./images/product-img-6.jpg",
+        "id": "product0002"
+    },
+    {
+        "item": "Salted Instant Popcorn",
+        "price": 2.5,
+        "category": "Instant Food",
+        "image": "./images/product-img-5.jpg",
+        "id": "product0003"
+    },
+    {
+        "item": "Britannia Cheese Slices",
+        "price": 6.25,
+        "category": "Dairy",
+        "image": "./images/product-img-7.jpg",
+        "id": "product0004"
+    },
+    {
+        "item": "Crushed Tomatoes",
+        "price": 4.99,
+        "category": "Fruits & Vegetables",
+        "image": "./images/product-img-12.jpg",
+        "id": "product0005"
+    }
+]
