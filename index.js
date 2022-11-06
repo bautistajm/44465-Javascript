@@ -19,8 +19,6 @@ const addToCart = () => {
             line.classList.add("line");
             line.innerText = `${selectedProducts[i].item}, $${selectedProducts[i].price}`;
             containerOfProducts.appendChild(line);
-            console.log(selectedProducts);
-            console.log(selectedProducts.length);
             let removeCrossButton = document.createElement("div");
             removeCrossButton.classList.add("removecross");
             removeCrossButton.innerText = "❌";
@@ -152,7 +150,7 @@ buyButton.onclick = () => {
     selectedProducts.forEach(element => {
     sum += element.price;
     });
-    swal ( "Success" ,  "Your purchase is complete. The total amount is $" + sum ,  "success");
+    swal ( "Success" ,  "Your purchase is complete. The total amount is $" + sum.toFixed(2) ,  "success");
     selectedProducts.splice(0,(selectedProducts.length-1));
     localStorage.clear();
     let okButton = document.getElementsByClassName("swal-button--confirm");
