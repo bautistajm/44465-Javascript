@@ -11291,6 +11291,10 @@ textarea.form-control-lg {
   display: none;
 }
 
+#buy-button {
+  display: none;
+}
+
 .removecross:hover {
   cursor: pointer;
 }

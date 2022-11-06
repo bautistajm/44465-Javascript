@@ -7,6 +7,7 @@ const getPrice = () => {
     }
 }
 
+
 const addToCart = () => {
     let line;
     if (selectedProducts.length === 0) {
@@ -18,6 +19,8 @@ const addToCart = () => {
             line.classList.add("line");
             line.innerText = `${selectedProducts[i].item}, $${selectedProducts[i].price}`;
             containerOfProducts.appendChild(line);
+            console.log(selectedProducts);
+            console.log(selectedProducts.length);
             let removeCrossButton = document.createElement("div");
             removeCrossButton.classList.add("removecross");
             removeCrossButton.innerText = "❌";
@@ -30,8 +33,15 @@ const addToCart = () => {
                 if (selectedProducts.length === 0) {
                     noProductsSelected.innerText = "You have not selected any product yet.";
                 }
+                if (selectedProducts.length === 0) {
+                    buyButton.style.display = "none";
+                }
             }
             line.appendChild(removeCrossButton);
+            if (selectedProducts.length > 0) {
+                buyButton.style.display = "block";
+            } 
+            }
         }
         let lastProductAdded = selectedProducts.length - 1;
         //Tostify
@@ -47,7 +57,7 @@ const addToCart = () => {
         productCounter.innerText = selectedProducts.length;
         localStorage.setItem("productcounter", selectedProducts.length);
     }
-}
+
 
 
 const renderizeProducts = () => {
@@ -109,6 +119,9 @@ let groceries = [];
 // Array to push selected products to the cart.
 const selectedProducts = [];
 
+// Array to push deleted products from the cart
+const deletedProducts = [];
+
 //DOM for modal elements (cart)
 let cart = document.getElementById("modal");
 let xButton = document.getElementById("x-close");
@@ -118,6 +131,7 @@ let noProductsSelected = document.getElementById("no-products-selected");
 noProductsSelected.innerText = "You have not selected any product yet.";
 let cartButton = document.getElementById("cart-button");
 let containerOfProducts = document.createElement("div");
+let buyButton = document.getElementById("buy-button");
 
 //Events for modal and its elements
 
@@ -133,18 +147,37 @@ closeButton.onclick = () => {
     cart.style.display = "none";
 }
 
+buyButton.onclick = () => {
+    sum = 0;
+    selectedProducts.forEach(element => {
+    sum += element.price;
+    });
+    swal ( "Success" ,  "Your purchase is complete. The total amount is $" + sum ,  "success");
+    selectedProducts.splice(0,(selectedProducts.length-1));
+    localStorage.clear();
+    let okButton = document.getElementsByClassName("swal-button--confirm");
+    console.log(sum);
+    okButton[0].id = "finished";
+    let finished = document.getElementById("finished");
+    finished.onclick = () => {
+        document.location.reload(true);
+    }
+}
+
+
 let productsInStorage = JSON.parse(localStorage.getItem("selectedproducts"));
 if ((productsInStorage !== null)) {
     for (let i = 0; i < productsInStorage.length; i++) {
         selectedProducts.push(productsInStorage[i]);
     }
     for (let i = 0; i < selectedProducts.length; i++) {
-        productCounter.innerText = localStorage.getItem("productcounter");
         noProductsSelected.innerText = "";
-        let line = document.createElement("li");
+        line = document.createElement("li");
         line.classList.add("line");
         line.innerText = `${selectedProducts[i].item}, $${selectedProducts[i].price}`;
-        cartMessage.appendChild(line);
+        containerOfProducts.appendChild(line);
+        console.log(selectedProducts);
+        console.log(selectedProducts.length);
         let removeCrossButton = document.createElement("div");
         removeCrossButton.classList.add("removecross");
         removeCrossButton.innerText = "❌";
@@ -157,8 +190,17 @@ if ((productsInStorage !== null)) {
             if (selectedProducts.length === 0) {
                 noProductsSelected.innerText = "You have not selected any product yet.";
             }
+            if (selectedProducts.length === 0) {
+                buyButton.style.display = "none";
+            }
         }
         line.appendChild(removeCrossButton);
-    };
-}
+        if (selectedProducts.length > 0) {
+            buyButton.style.display = "block";
+        } 
+        }
+    }
+
+//Total amount sum
+let sum;
 
