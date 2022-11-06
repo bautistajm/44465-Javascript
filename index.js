@@ -7,23 +7,35 @@ const getPrice = () => {
     }
 }
 
+//Function to delete a product from the cart.
+const deleteItem = () => {
+    let indexOfProductToBeDeleted = selectedProducts.findIndex(pr => pr.item === productToBeDeleted);
+    selectedProducts.splice(indexOfProductToBeDeleted,1);
+}
 
+//Function to add a product to the cart.
 const addToCart = () => {
     let line;
+    //I check if there are any products in the cart or not.
     if (selectedProducts.length === 0) {
         noProductsSelected.innerText = "You have not selected any product yet.";
     } else {
+        //I create a line item for each of the products added.
         for (let i = 0; i < selectedProducts.length; i++) {
             noProductsSelected.innerText = "";
             line = document.createElement("li");
             line.classList.add("line");
             line.innerText = `${selectedProducts[i].item}, $${selectedProducts[i].price}`;
             containerOfProducts.appendChild(line);
+            selectionOfProducts.push(selectedProducts[i]);
+            //I create a button to remove each of the products added.
             let removeCrossButton = document.createElement("div");
             removeCrossButton.classList.add("removecross");
             removeCrossButton.innerText = "❌";
             removeCrossButton.onclick = () => {
-                selectedProducts.splice (i, 1);
+                productToBeDeleted = selectionOfProducts[i].item;
+                console.log(productToBeDeleted);
+                deleteItem();
                 localStorage.setItem("selectedproducts", JSON.stringify(selectedProducts));
                 cartMessage.removeChild(line);
                 productCounter.innerText = selectedProducts.length;
@@ -42,7 +54,7 @@ const addToCart = () => {
             }
         }
         let lastProductAdded = selectedProducts.length - 1;
-        //Tostify
+        //Tostify to show which product has been added to the cart.
         Toastify({
 
         text: `You added ${selectedProducts[lastProductAdded].item}  to the cart.`,
@@ -118,7 +130,7 @@ let groceries = [];
 const selectedProducts = [];
 
 // Array to push deleted products from the cart
-const deletedProducts = [];
+let selectionOfProducts = [];
 
 //DOM for modal elements (cart)
 let cart = document.getElementById("modal");
@@ -162,7 +174,7 @@ buyButton.onclick = () => {
     }
 }
 
-
+//I retrieve the products stored in local storage.
 let productsInStorage = JSON.parse(localStorage.getItem("selectedproducts"));
 if ((productsInStorage !== null)) {
     for (let i = 0; i < productsInStorage.length; i++) {
@@ -180,7 +192,9 @@ if ((productsInStorage !== null)) {
         removeCrossButton.classList.add("removecross");
         removeCrossButton.innerText = "❌";
         removeCrossButton.onclick = () => {
-            selectedProducts.splice (i, 1);
+            productToBeDeleted = selectionOfProducts[i].item;
+            console.log(productToBeDeleted);
+            deleteItem();
             localStorage.setItem("selectedproducts", JSON.stringify(selectedProducts));
             cartMessage.removeChild(line);
             productCounter.innerText = selectedProducts.length;
