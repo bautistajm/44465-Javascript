@@ -1,4 +1,4 @@
-// Function to extract price from array of clothes.
+// Function to extract price from array of groceries.
 const getPrice = () => {
     for (const grocery of groceries){
         if (product === grocery.item) {
@@ -181,13 +181,13 @@ if ((productsInStorage !== null)) {
         selectedProducts.push(productsInStorage[i]);
     }
     for (let i = 0; i < selectedProducts.length; i++) {
+        productCounter.innerText = localStorage.getItem("productcounter");
         noProductsSelected.innerText = "";
-        line = document.createElement("li");
+        let line = document.createElement("li");
         line.classList.add("line");
         line.innerText = `${selectedProducts[i].item}, $${selectedProducts[i].price}`;
-        containerOfProducts.appendChild(line);
-        console.log(selectedProducts);
-        console.log(selectedProducts.length);
+        cartMessage.appendChild(line);
+        selectionOfProducts.push(selectedProducts[i]);
         let removeCrossButton = document.createElement("div");
         removeCrossButton.classList.add("removecross");
         removeCrossButton.innerText = "❌";
@@ -210,8 +210,10 @@ if ((productsInStorage !== null)) {
         if (selectedProducts.length > 0) {
             buyButton.style.display = "block";
         } 
-        }
-    }
+    };
+}
+
+
 
 //Total amount sum
 let sum;
